@@ -1,8 +1,24 @@
 @import "tailwindcss";
+@config "../tailwind.config.mjs";
 
+@custom-variant dark (&:where(.dark, .dark *));
+
+/*default is light theme*/
 :root {
   --background: #ffffff;
   --foreground: #171717;
+}
+/*the dark theme*/
+.dark {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+/* the operating system's theme */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
 }
 
 @theme inline {
@@ -12,15 +28,20 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
 
 body {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.theme-root {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+h2 {
+  @apply text-2xl font-bold;
+}
+
+.neon-shadow {
+  @apply shadow-[0_0_10px_theme('colors.purple.200'),0_0_25px_theme('colors.purple.700')];
 }
