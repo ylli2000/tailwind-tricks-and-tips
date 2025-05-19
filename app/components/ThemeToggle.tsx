@@ -1,6 +1,12 @@
 "use client";
 
-export default function ClientThemeToggle({theme, toggleTheme}: {theme: string|null, toggleTheme: () => void}) {
+
+import { useTheme } from "../hooks/useTheme";
+
+export default function ThemeProvider() {
+  
+  const { theme, toggleTheme } = useTheme();
+
   return (
       <button
         onClick={toggleTheme}
