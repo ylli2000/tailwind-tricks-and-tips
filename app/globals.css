@@ -14,6 +14,23 @@ html.light {
   --background: #ffffff;
   --foreground: #171717;
 }
+html.light.hot {
+  --primary: hsl(287, 70%, 52%);
+  --primary-foreground: hsl(287, 70%, 92%);
+}
+html.dark.hot {
+  --primary: hsl(294, 79%, 26%);
+  --primary-foreground: hsl(294, 83%, 92%);
+}
+html.light.cold {
+  --primary: hsl(204, 70%, 52%);
+  --primary-foreground: hsl(204, 70%, 92%);
+}
+html.dark.cold {
+  --primary: hsl(171, 88%, 26%);
+  --primary-foreground: hsl(171, 88%, 96%);
+}
+
 /* the operating system's theme */
 @media (prefers-color-scheme: dark) {
   :root {
@@ -27,9 +44,10 @@ html.light {
   --font-mono: var(--font-geist-mono);
 }
 
+
 /*default is light theme*/
 :root {
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
   background: var(--background);
   color: var(--foreground);
 }
@@ -40,4 +58,9 @@ h2 {
 
 .neon-shadow {
   @apply shadow-[0_0_10px_theme('colors.purple.200'),0_0_25px_theme('colors.purple.700')];
+}
+
+/* define button styles for light and dark themes */
+.btn-primary {
+  @apply bg-[var(--primary)] text-[var(--primary-foreground)] rounded-md px-4 py-2 shadow-lg;
 }

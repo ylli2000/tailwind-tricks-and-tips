@@ -1,19 +1,16 @@
 "use client";
+import { Props, useTheme } from "../hooks/useTheme";
 
-
-import { useTheme } from "../hooks/useTheme";
-
-export default function ThemeProvider() {
-  
-  const { theme, toggleTheme } = useTheme();
+export default function ThemeToggle(props: Props) {
+  const { theme, toggleTheme } = useTheme(props);
 
   return (
-      <button
-        onClick={toggleTheme}
-        style={{ position: "fixed", top: 16, right: 16, zIndex: 1000 }}
-        aria-label="Toggle dark mode"
-      >
-        {theme === "dark" ? "🌙 Dark" : "☀️ Light"}
-      </button>
+    theme ? (<button
+      onClick={toggleTheme}
+      className="btn-primary fixed z-50 top-4 right-4"
+      aria-label="Toggle dark mode"
+    >
+      {theme === "dark" ? "🌙 Dark" : "☀️ Light"}
+    </button>) : null
   );
 } 

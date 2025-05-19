@@ -1,54 +1,81 @@
 "use client";
+import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 
 const DARK = 'dark';
 const LIGHT = 'light';
-const STORAGE_KEY = 'theme';
+const HOT = 'hot';
+const COLD = 'cold';
+const MODE_KEY = 'theme';
+const COLOR_TEMPERATURE_KEY = 'color-temperature';
 
-export function useTheme() {
-  const [theme, setTheme] = useState<string | null>(null);
+export type Props = {
+  storedTheme: 'dark' | 'light' | null;
+  storedColorTemperature: 'hot' | 'cold' | null;
+}
 
-  const preferMode = (preferDark: boolean, isStorage: boolean = false) => {
+export function useTheme({ storedTheme, storedColorTemperature }: Props) {
+  const [theme, setTheme] = useState<'dark' | 'light' | null>(storedTheme);
+  const [colorTemperature, setColorTemperature] = useState<'hot' | 'cold' | null>(storedColorTemperature);
+
+  const preferTheme = (preferDark: boolean, isStorage: boolean = false) => {
     const mode = preferDark ? DARK : LIGHT;
-    console.log('----->setting mode to: ',mode, isStorage ? ' (storage)' : '');
     setTheme(mode);
-    setCls(mode);
-    if (isStorage) setStorage(mode);
+    setThemeCls(mode);
+    if (isStorage) setStoredTheme(mode);
+  }
+
+  const preferColorTemperature = (preferHot: boolean, isStorage: boolean = false) => {
+    const temperature = preferHot ? HOT : COLD;
+    setColorTemperature(temperature);
+    setColorTemperatureCls(temperature);
+    if (isStorage) setStoredColorTemperature(temperature);
   }
 
   useEffect(() => {
-    // On mount, check localStorage or system preference
-    const mode = getStorage();
 
-    if (mode) {
-      console.log('-----> found mode in storage: ',mode);
-      preferMode(mode === DARK);
+    if (storedTheme) {
+      preferTheme(storedTheme === DARK);
     } else {
-      console.log('-----> mode in system preference:', getSystemPreference());
-      preferMode(getSystemPreference());
+      preferTheme(getSystemThemePreference());
     }
-  }, []);
+
+    if (storedColorTemperature) {
+      preferColorTemperature(storedColorTemperature === HOT);
+    } else {
+      preferColorTemperature(getSystemColorTemperaturePreference());
+    }
+  }, [storedTheme, storedColorTemperature]);
 
   const toggleTheme = () => {
-    preferMode(theme !== DARK, true);
+    preferTheme(theme !== DARK, true);
   };
 
-  return { theme, toggleTheme };
+  const toggleColorTemperature = () => {
+    preferColorTemperature(colorTemperature === HOT, true);
+  };
+
+  return { 
+    theme, 
+    toggleTheme, 
+    colorTemperature, 
+    toggleColorTemperature, 
+  };
 }
 
-const setCls = (mode: string) => {
-  console.log('----->setting cls: ',mode);
+const setThemeCls = (mode: string) => {
   document.documentElement.classList.toggle(DARK, mode === DARK);
   document.documentElement.classList.toggle(LIGHT, mode === LIGHT);
 }
-
-const setStorage = (mode: string) => {
-  console.log('----->setting STORAGE_KEY: ',STORAGE_KEY,mode);
-  localStorage.setItem(STORAGE_KEY, mode);
+const setStoredTheme = (mode: string) => {
+  Cookies.set(MODE_KEY, mode, { sameSite: 'lax', expires: 365 });
+};
+const getSystemThemePreference = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
+const setColorTemperatureCls = (temperature: string) => {
+  document.documentElement.classList.toggle(HOT, temperature === HOT);
+  document.documentElement.classList.toggle(COLD, temperature === COLD);
 }
-const getStorage = () => {
-  return localStorage.getItem(STORAGE_KEY);
-}
-const getSystemPreference = () => {
-  return window.matchMedia('(prefers-color-scheme: dark)').matches;
-}
+const setStoredColorTemperature = (temperature: string) => {
+  Cookies.set(COLOR_TEMPERATURE_KEY, temperature, { sameSite: 'lax', expires: 365 });
+};
+const getSystemColorTemperaturePreference = () => false; //simply defaul to cold

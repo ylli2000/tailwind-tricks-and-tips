@@ -57,3 +57,31 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+# Tailwind Tricks and Tips
+
+## Theme Handling (Dark/Light & Hot/Cold)
+
+- The app now uses **cookies** (not localStorage) to store the user's `theme` (dark/light) and `color-temperature` (hot/cold).
+- On the server, these cookies are read and the values are injected as classes on the `<html>` tag, allowing for correct initial theme and color rendering with no hydration mismatch or FOUC.
+- The client-side `fouc.tsx` script is no longer needed and has been deleted.
+- The `ThemeToggle` and `useTheme` hook now receive the initial theme and color values from cookies, ensuring the UI is correct on first render.
+- This approach follows Tailwind's recommendation to set theme classes on `<html>` and provides a seamless SSR experience.
+
+## How it works
+
+1. **User toggles theme or color temperature:**
+   - The new value is saved to a cookie using `js-cookie`.
+2. **On each request:**
+   - The server reads the cookies and sets the appropriate classes on `<html>`.
+   - The initial theme and color are passed to React components for correct initial state.
+3. **No FOUC or hydration errors:**
+   - The initial render always matches between server and client.
+
+## Development
+- To run the app: `npm run dev`
+- To build: `npm run build`
+
+---
+
+*This project demonstrates advanced theme handling with Tailwind CSS and Next.js, using cookies for SSR-friendly, flicker-free theming.*
