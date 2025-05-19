@@ -9,16 +9,28 @@ export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <div className="flex flex-col gap-2 mb-8">
+        <div className="flex flex-col gap-2 mb-8 max-w-4xl ">
 
         {/* Dark mode example, how to apply dark mode */}
-          <h2>1. This is a Dark Mode example</h2>
-          <p>Click the ☀️ or 🌙 icon to toggle the theme.</p>
-          <p>The theme is set in the globals.css file, and ThemeWrapper is used in the layout.tsx file.</p>
+          <h2>1. Dark Mode Toggle</h2>
+          <p>No theme flicker! The app uses cookies to store the user's theme and color-temperature. If cookies exist, the theme is pre-rendered server-side for a seamless experience. If no cookies are set, the system preference is detected in the useTheme hook—this may delay the button render for a moment, but there is never a theme flicker.</p>
+          <ul className="list-disc ml-6">
+            <li>The app now uses <b>cookies</b> (not localStorage) to store the user's <code>theme</code> (dark/light) and <code>color-temperature</code> (hot/cold).</li>
+            <li>On the server, these cookies are read and the values are injected as classes on the <code>&lt;html&gt;</code> tag, allowing for correct initial theme and color rendering with no hydration mismatch or FOUC.</li>
+            <li>The client-side <code>fouc.tsx</code> script is no longer needed and has been deleted.</li>
+            <li>The <code>ThemeToggle</code> and <code>useTheme</code> hook now receive the initial theme and color values from cookies, ensuring the UI is correct on first render.</li>
+            <li>This approach follows Tailwind's recommendation to set theme classes on <code>&lt;html&gt;</code> and provides a seamless SSR experience.</li>
+          </ul>
+          <p><b>How it works:</b></p>
+          <ol className="list-decimal ml-6">
+            <li><b>User toggles theme or color temperature:</b> The new value is saved to a cookie using <code>js-cookie</code>.</li>
+            <li><b>On each request:</b> The server reads the cookies and sets the appropriate classes on <code>&lt;html&gt;</code>. The initial theme and color are passed to React components for correct initial state.</li>
+            <li><b>No FOUC or hydration errors:</b> The initial render always matches between server and client.</li>
+          </ol>
         </div>
         {/* Group-hover  Peer-hover example */}
         <div className="flex flex-col gap-2">
-          <h2>T2. his is a group-hover example</h2>
+          <h2>2. This is a group-hover example</h2>
           <div className="peer/my-peer group/my-group grid place-items-center h-20 w-20 bg-blue-400 hover:bg-purple-400">
             <div className="h-5 w-5 bg-black group-hover/my-group:bg-red-800"></div>
             <div className="h-5 w-5 bg-black group-hover/my-group:bg-green-800"></div>

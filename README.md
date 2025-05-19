@@ -20,19 +20,37 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 ## Demo Features
 
-### 1. Dark Mode Toggle
-A demonstration of how to implement dark mode in a Next.js app using Tailwind CSS. Click the ☀️ or 🌙 icon in the top-right corner to toggle between light and dark themes. The theme logic is managed by a `ThemeWrapper` and configured in `globals.css`.
+## 1. Dark Mode Toggle
+No theme flicker! The app uses cookies to store the user's theme and color-temperature. If cookies exist, the theme is pre-rendered server-side for a seamless experience. If no cookies are set, the system preference is detected in the useTheme hook—this may delay the button render for a moment, but there is never a theme flicker.
 
-### 2. Group Hover Example
+### Theme Handling (Dark/Light & Hot/Cold)
+
+- The app now uses **cookies** (not localStorage) to store the user's `theme` (dark/light) and `color-temperature` (hot/cold).
+- On the server, these cookies are read and the values are injected as classes on the `<html>` tag, allowing for correct initial theme and color rendering with no hydration mismatch or FOUC.
+- The client-side `fouc.tsx` script is no longer needed and has been deleted.
+- The `ThemeToggle` and `useTheme` hook now receive the initial theme and color values from cookies, ensuring the UI is correct on first render.
+- This approach follows Tailwind's recommendation to set theme classes on `<html>` and provides a seamless SSR experience.
+
+### How it works
+
+1. **User toggles theme or color temperature:**
+   - The new value is saved to a cookie using `js-cookie`.
+2. **On each request:**
+   - The server reads the cookies and sets the appropriate classes on `<html>`.
+   - The initial theme and color are passed to React components for correct initial state.
+3. **No FOUC or hydration errors:**
+   - The initial render always matches between server and client.
+
+## 2. Group Hover Example
 Shows how to use Tailwind's `group-hover` utility to style child elements when a parent is hovered. Hover over the blue box to see the inner squares change color.
 
-### 3. Peer Hover Example
+## 3. Peer Hover Example
 Demonstrates the `peer-hover` utility, where hovering one element (the peer) changes the style of another. Hover over the green box to see the effect on the adjacent element.
 
-### 4. Group Hover with Image
+## 4. Group Hover with Image
 Illustrates a practical use of `group-hover` by swapping an image on hover. Hover over the image to see it change.
 
-### 5. Animation Utilities
+## 5. Animation Utilities
 Examples of Tailwind's built-in animation classes: `animate-ping`, `animate-spin`, `animate-bounce`, and `animate-pulse`. Each animation is shown with a different emoji or text for visual effect.
 
 ### 6. Extending Tailwind CSS
@@ -57,26 +75,6 @@ You can check out [the Next.js GitHub repository](https://github.com/vercel/next
 The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
 Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-
-# Tailwind Tricks and Tips
-
-## Theme Handling (Dark/Light & Hot/Cold)
-
-- The app now uses **cookies** (not localStorage) to store the user's `theme` (dark/light) and `color-temperature` (hot/cold).
-- On the server, these cookies are read and the values are injected as classes on the `<html>` tag, allowing for correct initial theme and color rendering with no hydration mismatch or FOUC.
-- The client-side `fouc.tsx` script is no longer needed and has been deleted.
-- The `ThemeToggle` and `useTheme` hook now receive the initial theme and color values from cookies, ensuring the UI is correct on first render.
-- This approach follows Tailwind's recommendation to set theme classes on `<html>` and provides a seamless SSR experience.
-
-## How it works
-
-1. **User toggles theme or color temperature:**
-   - The new value is saved to a cookie using `js-cookie`.
-2. **On each request:**
-   - The server reads the cookies and sets the appropriate classes on `<html>`.
-   - The initial theme and color are passed to React components for correct initial state.
-3. **No FOUC or hydration errors:**
-   - The initial render always matches between server and client.
 
 ## Development
 - To run the app: `npm run dev`

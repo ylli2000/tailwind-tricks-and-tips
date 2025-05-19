@@ -25,8 +25,8 @@ export default async function RootLayout({
   children: React.ReactNode;
 }>) {
   const cookieStore = await cookies();
-  const theme = cookieStore.get('theme')?.value || 'light';
-  const colorTemperature = cookieStore.get('color-temperature')?.value || 'cold';
+  const theme = cookieStore.get('theme')?.value || null;
+  const colorTemperature = cookieStore.get('color-temperature')?.value || null;
 
   return (
     <html lang="en" className={`${theme} ${colorTemperature}`}>

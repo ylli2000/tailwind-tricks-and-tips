@@ -37,13 +37,17 @@ export function useTheme({ storedTheme, storedColorTemperature }: Props) {
     if (storedTheme) {
       preferTheme(storedTheme === DARK);
     } else {
-      preferTheme(getSystemThemePreference());
+      const preferDark = getSystemThemePreference();
+      preferTheme(preferDark);
+      setStoredTheme(preferDark ? DARK : LIGHT);
     }
 
     if (storedColorTemperature) {
       preferColorTemperature(storedColorTemperature === HOT);
     } else {
-      preferColorTemperature(getSystemColorTemperaturePreference());
+      const preferHot = getSystemColorTemperaturePreference();
+      preferColorTemperature(preferHot);
+      setStoredColorTemperature(preferHot ? HOT : COLD);
     }
   }, [storedTheme, storedColorTemperature]);
 
@@ -52,7 +56,7 @@ export function useTheme({ storedTheme, storedColorTemperature }: Props) {
   };
 
   const toggleColorTemperature = () => {
-    preferColorTemperature(colorTemperature === HOT, true);
+    preferColorTemperature(colorTemperature !== HOT, true);
   };
 
   return { 
@@ -79,3 +83,6 @@ const setStoredColorTemperature = (temperature: string) => {
   Cookies.set(COLOR_TEMPERATURE_KEY, temperature, { sameSite: 'lax', expires: 365 });
 };
 const getSystemColorTemperaturePreference = () => false; //simply defaul to cold
+
+// const getStoredTheme = () => Cookies.get(MODE_KEY);
+// const getStoredColorTemperature = () => Cookies.get(COLOR_TEMPERATURE_KEY);
