@@ -63,10 +63,16 @@ h2 {
 }
 
 /* define button styles for light and dark themes */
+.btn-primary,
+.btn-secondary {
+  @apply cursor-pointer rounded-md px-4 py-2;
+  @apply shadow-lg/15 transition-all duration-300;
+  @apply hover:brightness-103 hover:shadow-lg/20;
+}
 .btn-primary {
-  @apply bg-[var(--primary)] text-[var(--primary-foreground)] cursor-pointer rounded-md px-4 py-2 shadow-lg;
+  @apply bg-[var(--primary)] text-[var(--primary-foreground)];
 }
 
 .btn-secondary {
-  @apply bg-[var(--background)] text-[var(--border)] border border-[var(--border)] cursor-pointer rounded-md px-4 py-2 shadow;
+  @apply border bg-[var(--background)] text-[var(--border)]/95 border-[var(--border)]/95;
 }
