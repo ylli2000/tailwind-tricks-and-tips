@@ -1,18 +1,7 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import { cookies } from 'next/headers';
 import ThemeToggle from "./components/ThemeToggle";
 import "./globals.css";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -30,7 +19,7 @@ export default async function RootLayout({
 
   return (
     <html lang="en" className={`${theme} ${colorTemperature}`}>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`antialiased`}>
         <ThemeToggle 
           storedTheme={theme as 'dark' | 'light' | null} 
           storedColorTemperature={colorTemperature as 'cold' | 'hot' | null} 

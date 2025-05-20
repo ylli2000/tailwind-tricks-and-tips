@@ -7,7 +7,7 @@ export default function Home() {
   const [image, setImage] = useState("/card.png");
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 sm:p-20">
       <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
         <div className="flex flex-col gap-2 mb-8 max-w-4xl ">
 
@@ -71,7 +71,7 @@ export default function Home() {
           <div className="w-40 h-20 rounded-lg shadow-neon"></div>
 
           <p>`neon-*` this is a custom class from tailwind.config.js plugin</p>
-          <div className="flex flex-row gap-8">
+          <div className="flex flex-row gap-8 flex-wrap">
             <div className="w-40 h-20 rounded-lg neon-yellow"></div>
             <div className="w-40 h-20 rounded-lg neon-blue"></div>
             <div className="w-40 h-20 rounded-lg neon-green"></div>

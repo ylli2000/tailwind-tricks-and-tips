@@ -15,7 +15,7 @@ export default function ThemeToggle(props: Props) {
       </button>
       <button
         onClick={toggleColorTemperature}
-        className="btn-primary mt-2"
+        className="btn-secondary mt-2"
         aria-label="Toggle color temperature"
       >
         {colorTemperature === "hot" ? "🔥 Hot" : "❄️ Cold"}
