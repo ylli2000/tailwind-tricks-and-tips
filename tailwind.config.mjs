@@ -1,5 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 
+import typography from '@tailwindcss/typography';
 import defaultColors from "tailwindcss/colors";
 import plugin from "tailwindcss/plugin";
 
@@ -26,6 +27,7 @@ export default {
     },
   },
   plugins: [
+    typography,
     plugin(({ addUtilities }) => {
       const neonUtilities = {};
       for (const color in defaultColors) {

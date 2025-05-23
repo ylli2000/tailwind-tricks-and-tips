@@ -1,0 +1,70 @@
+import React from 'react';
+
+# MDX Example
+
+This is a sample MDX component that shows various MDX features that work with Tailwind Typography.
+
+## Features
+
+MDX combines **Markdown** with JSX to provide a powerful authoring experience.
+
+### Lists
+
+- Item one
+- Item two
+- Item three
+
+### Code Blocks
+
+```js
+// Example JavaScript code
+function greet(name) {
+  return `Hello, ${name}!`;
+}
+
+console.log(greet('MDX User'));
+```
+
+### Tables
+
+| Feature | Description |
+|---------|-------------|
+| Markdown | Simple content format |
+| JSX | Component support |
+| Tailwind | Beautiful styling |
+
+### Blockquotes
+
+> MDX is a powerful way to write content with live components.
+> It's perfect for documentation and blog posts.
+
+## Using Components
+
+You can import and use React components directly in your MDX:
+
+export function Counter() {
+  const [count, setCount] = React.useState(0);
+  return (
+    <div className="flex items-center gap-4 p-4 bg-blue-50 dark:bg-blue-900 rounded-md">
+      <button 
+        onClick={() => setCount(count - 1)}
+        className="px-3 py-1 bg-blue-500 text-white rounded"
+      >
+        -
+      </button>
+      <span className="text-lg font-bold">{count}</span>
+      <button 
+        onClick={() => setCount(count + 1)}
+        className="px-3 py-1 bg-blue-500 text-white rounded"
+      >
+        +
+      </button>
+    </div>
+  );
+}
+
+<Counter />
+
+## Conclusion
+
+MDX is a great tool for creating rich documentation with interactive components! 
