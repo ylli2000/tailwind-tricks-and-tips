@@ -4,13 +4,15 @@ import React from 'react';
 
 This is a sample MDX component that shows various MDX features that work with Tailwind Typography.
 
+**Note:** This content should be styled with the `prose` classes from our `mdx-components.tsx` file.
+
 ## Features
 
 MDX combines **Markdown** with JSX to provide a powerful authoring experience.
 
 ### Lists
 
-- Item one
+- Item one  
 - Item two
 - Item three
 
@@ -45,17 +47,17 @@ You can import and use React components directly in your MDX:
 export function Counter() {
   const [count, setCount] = React.useState(0);
   return (
-    <div className="flex items-center gap-4 p-4 bg-blue-50 dark:bg-blue-900 rounded-md">
+    <div className="flex items-center gap-4 p-4 bg-blue-50 dark:bg-blue-900 rounded-md my-4">
       <button 
         onClick={() => setCount(count - 1)}
-        className="px-3 py-1 bg-blue-500 text-white rounded"
+        className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
       >
         -
       </button>
       <span className="text-lg font-bold">{count}</span>
       <button 
         onClick={() => setCount(count + 1)}
-        className="px-3 py-1 bg-blue-500 text-white rounded"
+        className="px-3 py-1 bg-blue-500 text-white rounded hover:bg-blue-600"
       >
         +
       </button>
@@ -64,6 +66,10 @@ export function Counter() {
 }
 
 <Counter />
+
+## Testing Custom Components
+
+This heading should be styled by our custom `h2` component from `mdx-components.tsx`.
 
 ## Conclusion
 

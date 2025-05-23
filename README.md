@@ -83,3 +83,136 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/bui
 ---
 
 *This project demonstrates advanced theme handling with Tailwind CSS and Next.js, using cookies for SSR-friendly, flicker-free theming.*
+
+## 7. Size Shorthand
+Instead of using both `w-24 h-24`, you can use the more concise `size-24` utility class. This shorthand reduces code duplication and improves readability when setting equal width and height values.
+
+## 8. Divide Utilities
+Use `divide-y-8` to create consistent spacing with dividers between elements instead of adding individual margins. You can also add colors with `divide-orange-500`. This approach is cleaner than manually adding borders to each element.
+
+## 9. Space Utilities
+When `flex` isn't applied, you can use `space-y-8` to create vertical spacing between children elements. This is particularly useful for stacking content with consistent spacing without wrapping each item.
+
+## 10. Line Clamp
+Use `line-clamp-3` to limit text to a specific number of lines with an ellipsis. This is perfect for card layouts, previews, or any content that needs to maintain consistent height regardless of text length.
+
+## 11. Truncate
+`truncate` is equivalent to `line-clamp-1` and simpler than using `text-ellipsis`. It's ideal for single-line text that needs to fit within a container while showing an ellipsis for overflow.
+
+## 12. Button Focus Styling
+Use `focus:outline-none` to remove the default browser outline on buttons, then add custom focus states like `focus:bg-blue-600`. This provides better control over accessibility and visual feedback.
+
+## 13. Ring Utilities
+Use `ring-1 ring-offset-2` for custom focus indicators that aren't borders or outlines. Rings are perfect for focus states as they don't affect layout and provide clear visual feedback. You can customize colors with `ring-blue-500`.
+
+## 14. Gradient Backgrounds
+Create beautiful gradients with `bg-gradient-to-r from-blue-500 to-purple-500`. You can also use `via` for three-color gradients and percentage stops like `from-blue-500 from-10% via-pink-500 via-50% to-purple-500 to-90%`.
+
+## 15. Screen Reader Accessibility
+- Use `sr-only` to hide content visually but keep it accessible to screen readers
+- Use `not-sr-only` to make screen-reader-only content visible again on focus
+- Essential for icons, buttons, and navigation elements that need descriptive text for accessibility
+
+## 16. Tailwind Typography Plugin
+The @tailwindcss/typography plugin provides a set of `prose` classes that make any HTML look nicely formatted. Perfect for markdown content, blog posts, and documentation.
+
+**Installation:**
+```bash
+npm install -D @tailwindcss/typography
+```
+
+**Configuration:**
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    // ...
+  },
+  plugins: [
+    require('@tailwindcss/typography'),
+    // ...
+  ],
+}
+```
+
+## 17. MDX Integration with Tailwind Prose Classes
+Combining MDX with Tailwind's `prose` classes creates beautifully styled markdown content with zero configuration. The prose classes automatically style all markdown elements with consistent typography, spacing, and colors.
+
+**Key Tailwind Focus:**
+- **prose classes**: Automatic styling for markdown elements
+- **prose-{size}**: Control typography scale (`prose-sm`, `prose-lg`, `prose-xl`)
+- **dark:prose-invert**: Dark mode support for prose content
+- **prose-{element}**: Fine-tune specific elements (`prose-headings:text-blue-600`)
+
+**Core Prose Classes:**
+```css
+prose                    /* Base prose styling */
+prose-sm prose-lg        /* Size variants */
+dark:prose-invert        /* Dark mode inversion */
+max-w-none             /* Remove max-width constraint */
+prose-headings:text-blue-600  /* Style all headings */
+prose-p:text-gray-700   /* Style paragraphs */
+prose-a:text-blue-500   /* Style links */
+```
+
+**Automatic Element Styling with Prose:**
+- **Headings**: Consistent sizing and spacing
+- **Paragraphs**: Optimal line height and spacing
+- **Lists**: Proper indentation and bullet styling
+- **Tables**: Clean borders and cell padding (with remarkGfm)
+- **Code blocks**: Syntax highlighting preparation
+- **Blockquotes**: Distinctive styling with left border
+- **Links**: Hover states and color styling
+
+**MDX Component Integration:**
+```tsx
+export function useMDXComponents(components: MDXComponents): MDXComponents {
+  return {
+    // Wrap all content in prose classes
+    wrapper: ({ children }) => (
+      <div className="prose dark:prose-invert max-w-none">
+        {children}
+      </div>
+    ),
+    // Override specific elements while keeping prose benefits
+    h1: ({ children }) => <h1 className="prose-h1 text-4xl">{children}</h1>,
+    table: ({ children }) => <table className="prose-table">{children}</table>,
+    ...components,
+  };
+}
+```
+
+**Advanced Prose Customization:**
+```css
+/* Custom prose modifiers */
+prose-headings:font-bold prose-headings:text-slate-900
+prose-lead:text-slate-700 prose-lead:text-xl
+prose-a:font-semibold prose-a:no-underline hover:prose-a:underline
+prose-strong:text-slate-900 prose-strong:font-semibold
+prose-code:text-slate-900 prose-code:font-medium
+```
+
+**Benefits of Prose + MDX:**
+- Zero configuration beautiful typography
+- Responsive design built-in
+- Dark mode support with `dark:prose-invert`
+- Consistent spacing and rhythm
+- Perfect for blogs, documentation, and content sites
+
+**Next.js Setup** (minimal for Tailwind focus):
+```bash
+npm install @next/mdx remark-gfm
+```
+
+**Configuration:**
+```js
+// next.config.mjs - enables remarkGfm for tables
+import createMDX from '@next/mdx';
+import remarkGfm from 'remark-gfm';
+
+const withMDX = createMDX({
+  options: { remarkPlugins: [remarkGfm] }
+});
+```
+
+The magic happens when prose classes meet MDX content - your markdown is instantly transformed into beautifully typeset content that looks professional and readable across all devices.

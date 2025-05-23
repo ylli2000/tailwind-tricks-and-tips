@@ -26,11 +26,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h2: ({ children }) => <h2 className="text-2xl font-bold mt-8 mb-4">{children}</h2>,
     h3: ({ children }) => <h3 className="text-xl font-bold mt-6 mb-3">{children}</h3>,
     
-    // Apply nice code formatting
-    code: ({ children }) => <code className="px-1 py-0.5 bg-gray-100 dark:bg-gray-800 rounded">{children}</code>,
-    pre: ({ children }) => <pre className="p-4 bg-gray-100 dark:bg-gray-800 rounded-md overflow-auto">{children}</pre>,
+    // Add table styling (optional - prose classes should handle this)
+    table: ({ children }) => <table className="table-auto border-collapse border border-gray-300 w-full">{children}</table>,
+    th: ({ children }) => <th className="border border-gray-300 px-4 py-2 font-semibold text-left">{children}</th>,
+    td: ({ children }) => <td className="border border-gray-300 px-4 py-2">{children}</td>,
     
-    // Pass any other components or props
+    // Pass any other components or props at the end
     ...components,
   };
 } 
