@@ -67,7 +67,7 @@ h2 {
 .btn-secondary {
   @apply cursor-pointer rounded-md px-4 py-2;
   @apply shadow-lg/15 transition-all duration-300;
-  @apply hover:brightness-103 hover:shadow-lg/20;
+  @apply hover:brightness-108 hover:shadow-lg/20;
 }
 .btn-primary {
   @apply bg-[var(--primary)] text-[var(--primary-foreground)];
@@ -75,4 +75,5 @@ h2 {
 
 .btn-secondary {
   @apply border bg-[var(--background)] text-[var(--border)]/95 border-[var(--border)]/95;
+  @apply hover:brightness-118;
 }

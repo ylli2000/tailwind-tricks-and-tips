@@ -121,20 +121,20 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Line clamp example - moving from section 11 to section 10 */}
+        {/* Line clamp example */}
         <div className="flex flex-col gap-2">
           <h2>10. Line Clamp</h2>
           <p>Use <code>line-clamp-3</code> to limit text to a specific number of lines with an ellipsis.</p>
           <div className="flex gap-8">
             <div className="w-64">
               <p className="font-bold">Without line-clamp:</p>
-              <p className="bg-gray-100 p-2 rounded text-gray-800 border border-gray-300">
+              <p className="bg-gray-100 px-2 py-1 rounded text-gray-800 border border-gray-300">
                 This is a very long paragraph that will take up multiple lines. It contains enough text to demonstrate how line-clamp works when applied to content that overflows its container.
               </p>
             </div>
             <div className="w-64">
               <p className="font-bold">With line-clamp-3:</p>
-              <p className="line-clamp-3 bg-gray-100 p-2 rounded text-gray-800 border border-gray-300">
+              <p className="line-clamp-3 bg-gray-100 px-2 py-1 rounded text-red-800 border border-gray-300 overflow-hidden">
                 This is a very long paragraph that will take up multiple lines. It contains enough text to demonstrate how line-clamp works when applied to content that overflows its container.
               </p>
             </div>
@@ -144,17 +144,17 @@ export default function Home() {
         {/* Truncate example - moving from section 12 to section 11 */}
         <div className="flex flex-col gap-2">
           <h2>11. Truncate</h2>
-          <p><code>truncate</code> is equivalent to <code>line-clamp-1</code> and simpler than using <code>text-ellipsis</code>.</p>
+          <p><code>truncate</code> is equivalent to <code>line-clampx-2</code> and simpler than using <code>text-ellipsis</code>.</p>
           <div className="flex flex-col gap-4">
             <div className="w-64">
               <p className="font-bold">Without truncate:</p>
-              <p className="bg-gray-100 p-2 rounded whitespace-nowrap overflow-hidden text-gray-800 border border-gray-300">
+              <p className="bg-gray-100 px-2 py-1 rounded whitespace-nowrap overflow-hidden text-gray-800 border border-gray-300">
                 This is a very long text that will overflow its container without truncation.
               </p>
             </div>
             <div className="w-64">
               <p className="font-bold">With truncate:</p>
-              <p className="truncate bg-gray-100 p-2 rounded text-gray-800 border border-gray-300">
+              <p className="truncate bg-gray-100 px-2 py-1 rounded text-gray-800 border border-gray-300">
                 This is a very long text that will overflow its container without truncation.
               </p>
             </div>
@@ -166,10 +166,10 @@ export default function Home() {
           <h2>12. Button Focus Styling</h2>
           <p>Use <code>focus:outline-none</code> to remove the default browser outline on buttons.</p>
           <div className="flex gap-4">
-            <button className="bg-blue-500 text-white px-4 py-2 rounded">
+            <button className="bg-[var(--primary)] text-white px-4 py-2 rounded">
               Default Focus
             </button>
-            <button className="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none focus:bg-blue-600">
+            <button className="bg-[var(--primary)] text-white px-4 py-2 rounded focus:outline-none focus:brightness-108">
               Custom Focus
             </button>
           </div>
